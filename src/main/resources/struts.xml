@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <constant name="struts.i18n.encoding" value="gbk"></constant>
+	<!-- 定义一个名称为fruitscity的包，继承struts 2的默认包，指定命名空间为"/" -->
+	<package name="default" namespace="/" extends="struts-default">
+	
+	   <!-- 配置拦截器AuthorityInterceptor -->
+	    <interceptors>
+	    	<interceptor name="loginCheck" class="com.fruitscity.interceptor.AuthorityInterceptor" />
+	    </interceptors>
+	    <!-- 设置全局的返回值,返回首页 -->         
+	    <global-results>             
+	    	<result name="login" type="redirectAction">/toShowGoods</result>         
+	    </global-results>     
+	    
+		<!-- 为GoodsAction类中的toShowGoods方法配置映射 -->
+		<action name="toShowGoods" class="goodsAction" method="toShowGoods">
+			<result name="toShowGoods">/show.jsp</result>			
+		</action>
+		
+		<action name="toManageGoods" class="goodsAction" method="toManageGoods">
+			<result name="managegoods">/managegoods.jsp</result>		
+			<interceptor-ref name="loginCheck" />	
+			<interceptor-ref name="defaultStack" />			
+		</action>
+		
+		<action name="toUpdateGoods" class="goodsAction" method="toUpdateGoods">
+			<result name="updateGoods">/updateGoods.jsp</result>		
+			<interceptor-ref name="loginCheck" />	
+			<interceptor-ref name="defaultStack" />			
+		</action>
+		
+		<action name="doUpdateGoods" class="goodsAction" method="doUpdateGoods">
+			<result name="toShowGoods" type="redirectAction">toShowGoods</result>	
+			<interceptor-ref name="loginCheck" />	
+			<interceptor-ref name="defaultStack" />			
+		</action>
+		
+		<!-- 为GoodsAction类中的toShowGoods方法配置映射 -->
+		<action name="toShowDetails" class="goodsAction" method="toShowDetails">
+			<result name="toShowDetails">/details.jsp</result>	
+			<interceptor-ref name="loginCheck" />	
+			<interceptor-ref name="defaultStack" />				
+		</action>
+		
+		<action name="toAddGoods" class="goodsAction" method="toAddGoods">
+			<result name="addGoods">/addGoods.jsp</result>	
+			<interceptor-ref name="loginCheck" />	
+			<interceptor-ref name="defaultStack" />				
+		</action>
+		
+		<action name="doAddGoods" class="goodsAction" method="doAddGoods">
+			<result name="toShowGoods" type="redirectAction">toShowGoods</result>		
+			<interceptor-ref name="loginCheck" />	
+			<interceptor-ref name="defaultStack" />			
+		</action>
+		
+		<action name="deleteGoods" class="goodsAction" method="deleteGoods">
+			<result name="toManageGoods" type="redirectAction">toManageGoods</result>		
+			<interceptor-ref name="loginCheck" />	
+			<interceptor-ref name="defaultStack" />			
+		</action>		
+		
+		<action name="addtoshopcart" class="cartAction" method="addtoshopcart">
+			<result name="shopCart">/shopCart.jsp</result>	
+			<interceptor-ref name="loginCheck" />	
+			<interceptor-ref name="defaultStack" />		
+		</action>
+		
+		<action name="updateSelectedQuantity" class="cartAction" method="updateSelectedQuantity">
+			<result name="shopCart">/shopCart.jsp</result>			
+			<interceptor-ref name="loginCheck" />	
+			<interceptor-ref name="defaultStack" />		
+		</action>
+		
+		<action name="deleteSelectedOrders" class="cartAction" method="deleteSelectedOrders">
+			<result name="shopCart">/shopCart.jsp</result>	
+			<interceptor-ref name="loginCheck" />	
+			<interceptor-ref name="defaultStack" />				
+		</action>		
+		
+		<action name="clearCart" class="cartAction" method="clearCart">
+			<result name="shopCart">/shopCart.jsp</result>	
+			<interceptor-ref name="loginCheck" />	
+			<interceptor-ref name="defaultStack" />				
+		</action>
+		
+		<action name="addOrders" class="ordersAction" method="addOrders">
+			<result name="show" type="redirectAction">toShowGoods</result>		
+			<interceptor-ref name="loginCheck" />	
+			<interceptor-ref name="defaultStack" />				
+		</action>
+		
+		<action name="toOrdersDetails" class="ordersAction" method="toOrdersDetails">
+			<result name="toOrdersDetails">/myordersdetails.jsp</result>	
+			<interceptor-ref name="loginCheck" />	
+			<interceptor-ref name="defaultStack" />				
+		</action>		
+		
+		<action name="toMyOrders" class="ordersAction" method="toMyOrders">
+			<result name="myorders">/myorders.jsp</result>	
+			<interceptor-ref name="loginCheck" />	
+			<interceptor-ref name="defaultStack" />			
+		</action>
+		
+		<action name="deleteOrders" class="ordersAction" method="deleteOrders">
+			<result name="toMyOrders" type="redirectAction">toMyOrders</result>		
+			<interceptor-ref name="loginCheck" />	
+			<interceptor-ref name="defaultStack" />		
+		</action>	
+		
+		<action name="toManageOrders" class="ordersAction" method="toManageOrders">
+			<result name="manageorders">/manageorders.jsp</result>	
+			<interceptor-ref name="loginCheck" />	
+			<interceptor-ref name="defaultStack" />			
+		</action>
+		
+		<action name="handleOrders" class="ordersAction" method="handleOrders">
+			<result name="toManageOrders" type="redirectAction">toManageOrders</result>		
+			<interceptor-ref name="loginCheck" />	
+			<interceptor-ref name="defaultStack" />	
+		</action>
+		
+		<action name="validateLogin" class="userAction" method="validateLogin">
+			<result name="toShowGoods" type="redirectAction">toShowGoods</result>
+		</action>
+		
+		<action name="register" class="userAction" method="register">			
+			<result name="show" type="redirectAction">toShowGoods</result>	
+		</action>
+		<action name="logOut" class="userAction" method="logOut">			
+			<result name="show" type="redirectAction">toShowGoods</result>	
+		</action>
+		<action name="modifyUsers" class="userAction" method="modifyUsers">			
+			<result name="show" type="redirectAction">toShowGoods</result>	
+		</action>
+		
+	</package>
+</struts>    
