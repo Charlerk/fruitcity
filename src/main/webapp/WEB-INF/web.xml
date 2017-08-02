@@ -806,7 +806,7 @@ standard deployment descriptor.
       
     <init-param>
       <param-name>config</param-name>
-      <param-value>../../resources/struts.xml</param-value> 
+      <param-value>../main/resources/struts.xml</param-value> 
     </init-param>
     
     
